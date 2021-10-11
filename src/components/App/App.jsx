@@ -47,7 +47,7 @@ export const App = () => {
             component={withQuicklink(MoviesPageView, options)}
           />
           <Route
-            path="/movies/:movieId"
+            path="/movies/:slug"
             component={withQuicklink(MovieDetailsView, options)}
           />
           <Route component={NotFoundView} />

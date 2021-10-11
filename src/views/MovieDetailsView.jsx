@@ -5,7 +5,8 @@ import MovieDetailsPage from '../components/MovieDetailsPage/MovieDetailsPage';
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState(null);
-  const { movieId } = useParams();
+  const { slug } = useParams();
+  const movieId = slug.match(/[a-z0-9]+$/)[0];
 
   useEffect(() => {
     movieDetails(movieId).then(setMovie);

@@ -19,6 +19,9 @@ export default function MoviesPage() {
       return;
     }
     moviesSearch(searchParams, page).then(data => {
+      if (data.length === 0) {
+        return toast.error(`there is no movie with that name  ${searchMovies}`);
+      }
       setMovies(prevMovies => [...prevMovies, ...data]);
     });
   }, [searchParams, page, searchMovies]);
@@ -27,9 +30,6 @@ export default function MoviesPage() {
     if (searchMovies === '') {
       toast.error('U need to write a name of movie!');
       return;
-    }
-    if (movies.length === 0) {
-      return toast.error(`there is no movie with that name  ${searchMovies}`);
     }
     setMovies([]);
     setSearchMovies(searchMovies);

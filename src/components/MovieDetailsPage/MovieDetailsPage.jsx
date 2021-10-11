@@ -28,7 +28,8 @@ const Reviews = lazy(() =>
 export default function MovieDetails({ movie }) {
   const history = useHistory();
   const location = useLocation();
-  const { movieId } = useParams();
+  const { slug } = useParams();
+  const movieId = slug.match(/[a-z0-9]+$/)[0];
   const { url, path } = useRouteMatch();
 
   const OnGoBack = () => {
