@@ -1,12 +1,20 @@
 import { lazy, Suspense } from 'react';
 import {
-  NavLink,
   useRouteMatch,
   Route,
   useParams,
   useLocation,
   useHistory,
 } from 'react-router-dom';
+import {
+  Btn,
+  Container,
+  IMG,
+  Title,
+  Text,
+  LinkStyled,
+  LinkContainer,
+} from './MovieDetails.styled';
 
 const Cast = lazy(() =>
   import('../../components/Cast/Cast' /* webpackChunkName: "cast"  */),
@@ -35,52 +43,52 @@ export default function MovieDetailsPage({ movie }) {
 
   return (
     <div>
-      <button type="button" onClick={GoBackClick}>
-        {location?.state?.from?.label ?? 'Back to home page'}
-      </button>
+      <Btn type="button" onClick={GoBackClick}>
+        ⬅ {location?.state?.from?.label ?? '⬅ Back to home page'}
+      </Btn>
 
       <div>
-        <div>
-          <img
+        <Container>
+          <IMG
             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             alt={movie.title}
           />
 
           <div>
-            <h2>
+            <Title>
               {movie.original_title}{' '}
               {movie.release_date && (
-                <p>Release Year: {movie.release_date.slice(0, -6)}</p>
+                <Text>Release Year: {movie.release_date.slice(0, -6)}</Text>
               )}
-            </h2>
-            <p>
+            </Title>
+            <Text>
               Popularity: {Math.ceil(movie.popularity)} Raiting:
               {movie.vote_average} Budget: {String(movie.budget).slice(0, -6)}M$
-            </p>
+            </Text>
             {movie.genres && (
-              <p>Genres: {movie.genres && genresList(movie.genres)}</p>
+              <Text>Genres: {movie.genres && genresList(movie.genres)}</Text>
             )}
-            <p>{movie.overview}</p>
-            <div>
-              <NavLink
+            <Text>{movie.overview}</Text>
+            <LinkContainer>
+              <LinkStyled
                 to={{
                   pathname: `${url}/cast`,
                   state: { from: location?.state?.from },
                 }}
               >
                 Cast
-              </NavLink>
-              <NavLink
+              </LinkStyled>
+              <LinkStyled
                 to={{
                   pathname: `${url}/reviews`,
                   state: { from: location?.state?.from },
                 }}
               >
                 Reviews
-              </NavLink>
-            </div>
+              </LinkStyled>
+            </LinkContainer>
           </div>
-        </div>
+        </Container>
       </div>
       <Suspense fallback={<h1>Loading...</h1>}>
         <Route path={`${path}/cast`}>
