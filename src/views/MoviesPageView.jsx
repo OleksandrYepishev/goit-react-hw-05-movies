@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 import { moviesSearch } from '../services/MoviesApi';
 import Searchbar from '../components/Searchbar/Searchbar';
 import MoviesList from '../components/MoviesList/MoviesList';
@@ -23,6 +24,13 @@ export default function MoviesPage() {
   }, [searchParams, page, searchMovies]);
 
   const onSearch = searchMovies => {
+    if (searchMovies === '') {
+      toast.error('U need to write a name of movie!');
+      return;
+    }
+    if (movies.length === 0) {
+      return toast.error(`there is no movie with that name  ${searchMovies}`);
+    }
     setMovies([]);
     setSearchMovies(searchMovies);
     setPage(1);
@@ -41,6 +49,7 @@ export default function MoviesPage() {
       <Searchbar onSearch={onSearch} />
       {searchMovies && <MoviesList movies={movies} label={label} />}
       {showBtn && <Button onClick={handleBtnLoadMore}></Button>}
+      <Toaster position="top-right" />
     </>
   );
 }

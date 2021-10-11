@@ -31,7 +31,7 @@ export default function MovieDetails({ movie }) {
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
 
-  const GoBackClick = () => {
+  const OnGoBack = () => {
     history.push(location?.state?.from?.location ?? '/');
   };
 
@@ -45,7 +45,7 @@ export default function MovieDetails({ movie }) {
 
   return (
     <div>
-      <Btn type="button" onClick={GoBackClick}>
+      <Btn type="button" onClick={OnGoBack}>
         ⬅ {location?.state?.from?.label ?? '⬅ Back to home page'}
       </Btn>
 
@@ -106,5 +106,5 @@ export default function MovieDetails({ movie }) {
 }
 
 MovieDetails.propTypes = {
-  movie: PropTypes.array.isRequired,
+  movie: PropTypes.object.isRequired,
 };
