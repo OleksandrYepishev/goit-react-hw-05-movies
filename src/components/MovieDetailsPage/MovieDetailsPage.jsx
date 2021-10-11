@@ -6,6 +6,7 @@ import {
   useLocation,
   useHistory,
 } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Btn,
   Container,
@@ -15,6 +16,7 @@ import {
   LinkStyled,
   LinkContainer,
 } from './MovieDetails.styled';
+import { Spinner } from '../Loader/Loader';
 
 const Cast = lazy(() =>
   import('../../components/Cast/Cast' /* webpackChunkName: "cast"  */),
@@ -23,7 +25,7 @@ const Reviews = lazy(() =>
   import('../../components/Reviews/Reviews' /* webpackChunkName: "reviews"  */),
 );
 
-export default function MovieDetailsPage({ movie }) {
+export default function MovieDetails({ movie }) {
   const history = useHistory();
   const location = useLocation();
   const { movieId } = useParams();
@@ -90,7 +92,7 @@ export default function MovieDetailsPage({ movie }) {
           </div>
         </Container>
       </div>
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<Spinner />}>
         <Route path={`${path}/cast`}>
           <Cast movieId={movieId} />
         </Route>
@@ -102,3 +104,7 @@ export default function MovieDetailsPage({ movie }) {
     </div>
   );
 }
+
+MovieDetails.propTypes = {
+  movie: PropTypes.array.isRequired,
+};

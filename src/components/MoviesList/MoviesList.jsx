@@ -37,4 +37,5 @@ export default MoviesList;
 
 MoviesList.propTypes = {
   movies: PropTypes.array.isRequired,
+  label: PropTypes.string.isRequired,
 };

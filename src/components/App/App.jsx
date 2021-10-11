@@ -1,18 +1,8 @@
-// import { useState, useLayoutEffect } from 'react';
-// import toast, { Toaster } from 'react-hot-toast';
 import { Switch, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-
-// import { SearchBar } from '../Searchbar/Searchbar';
 import { Container } from '../Container/Container';
 import { Navigation } from '../Navigation/Navigation';
-
-// import { fetchImages } from '../../services/ImagesApi';
-// import { ImageGallery } from '../ImageGallery/ImageGallery';
-// import { Button } from '../Button/Button.jsx';
 import { Spinner } from '../Loader/Loader';
-// import { SpinnerContainer } from '../Loader/Loader.styled';
-// import { Modal } from '../Modal/Modal';
 
 const HomeView = lazy(() =>
   import(
