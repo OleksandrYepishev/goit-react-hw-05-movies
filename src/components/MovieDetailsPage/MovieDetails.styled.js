@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Btn = styled.button`
   display: block;
+  cursor: pointer;
   margin: 20px auto 30px 30px;
   padding: 7px;
   border-radius: 15px;

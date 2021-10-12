@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { movieDetails } from '../services/MoviesApi';
+import { movieDetails } from '../services/moviesApi';
 import MovieDetailsPage from '../components/MovieDetailsPage/MovieDetailsPage';
 
 export default function MovieDetails() {
@@ -12,5 +12,5 @@ export default function MovieDetails() {
     movieDetails(movieId).then(setMovie);
   }, [movieId]);
 
-  return <>{movie && <MovieDetailsPage movie={movie} />}</>;
+  return movie ? <MovieDetailsPage movie={movie} /> : null;
 }

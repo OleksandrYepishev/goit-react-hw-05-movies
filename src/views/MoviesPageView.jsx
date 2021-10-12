@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import { moviesSearch } from '../services/MoviesApi';
+import { moviesSearch } from '../services/moviesApi';
 import Searchbar from '../components/Searchbar/Searchbar';
 import MoviesList from '../components/MoviesList/MoviesList';
 import { Button } from '../components/Button/Button';
@@ -48,7 +48,7 @@ export default function MoviesPage() {
     <>
       <Searchbar onSearch={onSearch} />
       {searchMovies && <MoviesList movies={movies} label={label} />}
-      {showBtn && <Button onClick={handleBtnLoadMore}></Button>}
+      {showBtn && <Button onClick={handleBtnLoadMore} />}
       <Toaster position="top-right" />
     </>
   );

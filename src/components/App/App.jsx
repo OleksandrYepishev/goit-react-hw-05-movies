@@ -2,22 +2,22 @@ import { Switch, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { withQuicklink } from 'quicklink/dist/react/hoc.js';
 import { Container } from '../Container/Container';
-import { Navigation } from '../Navigation/Navigation';
+import { Navigation } from '../Navigation/Navigation.jsx';
 import { Spinner } from '../Loader/Loader';
 
-const HomeView = lazy(() =>
+const AsyncHomeView = lazy(() =>
   import(
     '../../views/HomeView.jsx' /* webpackChunkName: "MovieDetailsView"  */
   ),
 );
 
-const MoviesPageView = lazy(() =>
+const AsyncMoviesPageView = lazy(() =>
   import(
     '../../views/MoviesPageView.jsx' /* webpackChunkName: "MovieDetailsView"  */
   ),
 );
 
-const MovieDetailsView = lazy(() =>
+const AsyncMovieDetailsView = lazy(() =>
   import(
     '../../views/MovieDetailsView.jsx' /* webpackChunkName: "MovieDetailsView"  */
   ),
@@ -40,15 +40,19 @@ export const App = () => {
         <Navigation />
 
         <Switch>
-          <Route path="/" exact component={withQuicklink(HomeView, options)} />
+          <Route
+            path="/"
+            exact
+            component={withQuicklink(AsyncHomeView, options)}
+          />
           <Route
             path="/movies/"
             exact
-            component={withQuicklink(MoviesPageView, options)}
+            component={withQuicklink(AsyncMoviesPageView, options)}
           />
           <Route
             path="/movies/:slug"
-            component={withQuicklink(MovieDetailsView, options)}
+            component={withQuicklink(AsyncMovieDetailsView, options)}
           />
           <Route component={NotFoundView} />
         </Switch>

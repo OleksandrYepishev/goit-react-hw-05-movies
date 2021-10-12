@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { moviesPopular } from '../services/MoviesApi';
+import { moviesPopular } from '../services/moviesApi';
 import MoviesList from '../components/MoviesList/MoviesList';
 
 export default function HomeView() {

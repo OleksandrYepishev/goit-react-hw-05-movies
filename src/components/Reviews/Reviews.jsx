@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { movieReviews } from '../../services/MoviesApi';
+import { movieReviews } from '../../services/moviesApi';
 import { Item, Title, Text } from './Reviews.styled';
 
 export default function MovieReviews({ movieId }) {

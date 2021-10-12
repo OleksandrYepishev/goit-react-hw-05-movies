@@ -18,10 +18,10 @@ import {
 } from './MovieDetails.styled';
 import { Spinner } from '../Loader/Loader';
 
-const Cast = lazy(() =>
+const AsyncCast = lazy(() =>
   import('../../components/Cast/Cast' /* webpackChunkName: "cast"  */),
 );
-const Reviews = lazy(() =>
+const AsyncReviews = lazy(() =>
   import('../../components/Reviews/Reviews' /* webpackChunkName: "reviews"  */),
 );
 
@@ -31,9 +31,12 @@ export default function MovieDetails({ movie }) {
   const { slug } = useParams();
   const movieId = slug.match(/[a-z0-9]+$/)[0];
   const { url, path } = useRouteMatch();
+  const {
+    state: { from },
+  } = location;
 
   const OnGoBack = () => {
-    history.push(location?.state?.from?.location ?? '/');
+    history.push(from?.location ?? '/');
   };
 
   const genresList = genres => {
@@ -47,7 +50,7 @@ export default function MovieDetails({ movie }) {
   return (
     <div>
       <Btn type="button" onClick={OnGoBack}>
-        ⬅ {location?.state?.from?.label ?? '⬅ Back to home page'}
+        ⬅ {from?.label ?? '⬅ Back to home page'}
       </Btn>
 
       <div>
@@ -76,7 +79,7 @@ export default function MovieDetails({ movie }) {
               <LinkStyled
                 to={{
                   pathname: `${url}/cast`,
-                  state: { from: location?.state?.from },
+                  state: { from },
                 }}
               >
                 Cast
@@ -84,7 +87,7 @@ export default function MovieDetails({ movie }) {
               <LinkStyled
                 to={{
                   pathname: `${url}/reviews`,
-                  state: { from: location?.state?.from },
+                  state: { from },
                 }}
               >
                 Reviews
@@ -95,11 +98,11 @@ export default function MovieDetails({ movie }) {
       </div>
       <Suspense fallback={<Spinner />}>
         <Route path={`${path}/cast`}>
-          <Cast movieId={movieId} />
+          <AsyncCast movieId={movieId} />
         </Route>
 
         <Route path={`${path}/reviews`}>
-          <Reviews movieId={movieId} />
+          <AsyncReviews movieId={movieId} />
         </Route>
       </Suspense>
     </div>

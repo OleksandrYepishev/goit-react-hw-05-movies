@@ -9,17 +9,19 @@ const getMoviesByAxios = axios.create({
 });
 
 export const moviesPopular = async () => {
-  const { data } = await getMoviesByAxios(`trending/movie/day?`);
+  const {
+    data: { results },
+  } = await getMoviesByAxios(`trending/movie/day?`);
 
-  return data.results;
+  return results;
 };
 
 export const moviesSearch = async (searchMovie, page) => {
-  const { data } = await getMoviesByAxios(
-    `search/movie?&query=${searchMovie}&page=${page}`,
-  );
+  const {
+    data: { results },
+  } = await getMoviesByAxios(`search/movie?&query=${searchMovie}&page=${page}`);
 
-  return data.results;
+  return results;
 };
 
 export const movieDetails = async movieId => {
@@ -35,7 +37,9 @@ export const movieCredits = async movieId => {
 };
 
 export const movieReviews = async movieId => {
-  const { data } = await getMoviesByAxios(`movie/${movieId}/reviews`);
+  const {
+    data: { results },
+  } = await getMoviesByAxios(`movie/${movieId}/reviews`);
 
-  return data.results;
+  return results;
 };

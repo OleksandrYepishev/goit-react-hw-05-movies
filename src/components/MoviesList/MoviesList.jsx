@@ -20,14 +20,14 @@ const MoviesList = ({ movies, label }) => {
               state: { from: { location, label: `${label}` } },
             }}
           >
-            {movie.poster_path ? (
-              <IMG
-                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                alt={movie.title}
-              />
-            ) : (
-              <IMG src={imgUrl} alt={movie.title} />
-            )}
+            <IMG
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                  : imgUrl
+              }
+              alt={movie.title}
+            />
             <Title>{movie.title}</Title>
           </LinkStyled>
         </Item>
